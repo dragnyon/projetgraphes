@@ -26,13 +26,10 @@ public class projet
                 //Donne l'endroit ou est trouvé le Pattern p
                 trouve=pos_espace.start();    
             }
-            //Decoupe la chaine de 0 a l'espace
-            String partie1 = line.substring(0,trouve);
-            //Decoupe la chaine de l'espace a la fin
-            String partie2 = line.substring(trouve+1,line.length());
-            //Récupère les int de la string
-            int partie1int = Integer.parseInt(partie1);
-            int partie2int = Integer.parseInt(partie2);
+            //Récupère la partie int avant l'espace
+            int partie1int = Integer.parseInt(line.substring(0,trouve));
+            //Récupère la partie int après l'espace
+            int partie2int = Integer.parseInt(line.substring(trouve+1,line.length()));
             System.out.println(partie1int);
             System.out.println(partie2int);
         }
