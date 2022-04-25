@@ -12,7 +12,7 @@ public class projet
         Scanner scan = new Scanner(doc);
         while(scan.hasNextLine())
         {
-
+            //lit le fichier
             String line = scan.nextLine();
             System.out.println(line);
             
