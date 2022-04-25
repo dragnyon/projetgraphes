@@ -11,22 +11,22 @@ public class projet
     {
         
         //File doc = new File("C:/Users/Dylan/Desktop/Semestre 6/Graphes/projet/testgraphe.txt");
-        File doc = new File("D:/Informatique/projetgraphes/testgraphe.txt"); 
+        File doc = new File("D:/Informatique/projetgraphes/graphes.txt"); 
         Scanner scan = new Scanner(doc);
-        int cptligne = 0;
+        int cptligneadj = 0;
 
         //Premier scan pour compter le nombre de ligne
         while(scan.hasNextLine())
         {
-            cptligne++;
+            cptligneadj++;
+            scan.nextLine();
         }
         scan.close();
-
 
         Scanner scan2 = new Scanner(doc);
         int cpt = 0;
         int sommetmax = 0;
-        int tab [][]= new int [cptligne][2];
+        int tab [][]= new int [cptligneadj][2];
         while(scan2.hasNextLine())
         {
             String line = scan2.nextLine();
@@ -47,8 +47,6 @@ public class projet
             {
                 sommetmax =tab[cpt][1];
             }
-            //Affiche le tableau a chaque ligne d'éxecution
-            System.out.println(tab[cpt][0] + "-" + tab[cpt][1]);
             cpt++;
         }
         scan2.close();
@@ -63,8 +61,22 @@ public class projet
         for(int i = 0;i<=sommetmax;i++)
         {
         degre[i][0] = i;
-        degre[i][1] = 0;
-        System.out.println(degre[i][0] + "|" + degre[i][1]);
+        //degre[i][1] = 0;
+        }
+
+        //remplissage des degré de chaque sommet
+        for(int i = 0; i<cptligneadj;i++)
+        {
+            for(int j = 0 ; j<2 ; j++)
+            {
+                degre[tab[i][j]][1]++;
+            }
+        }
+
+        //Affichage du tableau des degrés
+        for(int i=0;i<sommetmax;i++)
+        {
+            System.out.println("Sommet : "+degre[i][0]+" Degré : "+degre[i][1]);
         }
     }   
 
