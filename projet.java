@@ -14,7 +14,6 @@ public static void main (String [] args) throws Exception
     int tabdeg[][];
     int tabvoisin[][];
     affichetabadj(tabadjacent);
-
 }
 
 public static int[][] remplitabadj(String url)throws FileNotFoundException
@@ -49,17 +48,18 @@ public static int[][] remplitabadj(String url)throws FileNotFoundException
         //Stock dans le tableau
         tab[cpt][0] = Integer.parseInt(line.substring(0,trouve));
         tab[cpt][1] = Integer.parseInt(line.substring(trouve+1,line.length()));
+        System.out.println(tab[cpt][0]+"/"+tab[cpt][1]);
     }
         scan2.close();
         return tab;
 }
 public static void affichetabadj(int tab[][])
 {
-    for(int i = 0;i<tab.length;i++)
+    for(int i = 0;i<=tab.length;i++)
     {
-        System.out.println(tab[i][0]);
-        System.out.println(tab[i][1]);
+        System.out.println(tab[i][0]+"/"+tab[i][1]);
     }
+    System.out.println("Taille :"+tab.length);
 }
 
 }
