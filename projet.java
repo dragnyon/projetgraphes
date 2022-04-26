@@ -9,10 +9,12 @@ public class projet
     
     public static void main (String [] args) throws Exception
     {
-    String url = "D:/Informatique/projetgraphes/graphes.txt";
+    String url = "D:/Informatique/projetgraphes/testgraphe.txt";
     //String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/projet/testgraphe.txt";
     int degre [][];
     degre = getdegre(url);
+    int res = comptesommet(degre);
+    System.out.println(res);
     }
 
     static public int[][] getdegre(String url) throws FileNotFoundException
@@ -83,7 +85,7 @@ public class projet
             }
 
             //Affichage du tableau des degrés
-            for(int i=0;i<sommetmax;i++)
+            for(int i=0;i<sommetmax+1;i++)
             {
                 System.out.println("Sommet : "+degre[i][0]+" Degré : "+degre[i][1]);
             }
@@ -91,5 +93,17 @@ public class projet
         return degre;
         }
 
+        static public int comptesommet(int tab[][])
+        {
+            int cpt = 0;
+            for(int i=0; i<tab.length;i++ )
+            {
+                if(tab[i][1]>0)
+                {
+                    cpt++;
+                }
+            }
+            return cpt;
+        }
 
 }
