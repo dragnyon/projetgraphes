@@ -106,4 +106,24 @@ public class projet
             return cpt;
         }
 
+        int degen(int tab [][])
+        {
+            int k=0
+            while(comptesommet(tab)>0)
+            {
+                for(int i=0; i<tab.length;i++ )
+                {
+                    if(tab[i][1]<=k)
+                    {
+                        tab[i][1]=0;
+                        //+baisser le degres edes sommet adj
+                    }
+                }
+                k++;
+            }
+            //k correspond a la degen
+            return k;
+
+        }
+
 }
