@@ -9,15 +9,13 @@ public class projet
     
     public static void main (String [] args) throws Exception
     {
-        
-        
-       // String url = "D:/Informatique/projetgraphes/graphes.txt";
-        String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/projet/testgraphe.txt";
-
-        getdegre(url);
+    String url = "D:/Informatique/projetgraphes/graphes.txt";
+    //String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/projet/testgraphe.txt";
+    int degre [][];
+    degre = getdegre(url);
     }
 
-    static public void getdegre(String url) throws FileNotFoundException
+    static public int[][] getdegre(String url) throws FileNotFoundException
         {
             File doc = new File(url); 
             Scanner scan;
@@ -90,6 +88,7 @@ public class projet
                 System.out.println("Sommet : "+degre[i][0]+" Degré : "+degre[i][1]);
             }
        
+        return degre;
         }
 
 
