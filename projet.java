@@ -8,11 +8,13 @@ public class projet
 {
 public static void main (String [] args) throws Exception
 {
-    String url = "D:/Informatique/projetgraphes/testgraphe.txt";
+    String url = "D:/Informatique/projetgraphes/graphes.txt";
     //String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/projet/testgraphe.txt";
     int tabadjacent[][] = rempliTabAdj(url);
     int tabdeg[][] = rempliTabDegre(tabadjacent);
-    int tabvoisin[][];
+    int tabvoisin[][] = rempliTabVoisins(tabadjacent,tabdeg);
+    System.out.println("Degré maximum" + getDegreMax(tabdeg));
+    afficheTab2D(tabdeg);
 }
 
 public static int[][] rempliTabAdj(String url)throws FileNotFoundException
@@ -76,6 +78,43 @@ public static int[][] rempliTabDegre(int[][] tabadjacent)
     
 }
 
+public static int[][] rempliTabVoisins(int[][] tabadjacent,int[][] tabdegre)
+{
+    int sommetmax = getSommetMax(tabadjacent);
+    int degremax = getDegreMax(tabdegre);
+    int voisin[][] = new int [sommetmax+1][degremax+1];
+    
+
+    //Remplissage des noms
+    for(int i = 0; i<=sommetmax;i++)
+    {
+        voisin[i][0]=i;
+    }
+
+
+    //Remplissage des voisins
+    for(int i = 0 ; i<sommetmax ; i++)
+    {
+        int cpt=1;
+        while(voisin[tabadjacent[i][0]][cpt]!=0)
+        {
+            cpt++;
+        }        
+        voisin[tabadjacent[i][0]][cpt]=tabadjacent[i][1];
+    }
+    
+    //Affichage tableau voisins
+    for(int i =0 ;i<=sommetmax;i++)
+    {
+        System.out.print("\n");
+        for(int j = 0; j<=degremax ; j++)
+        {
+            System.out.print(voisin[i][j]+"|");
+        }
+    }
+    return voisin;
+}
+
 public static int getSommetMax(int[][] tab)
 {
     int sommetmax=0;
@@ -97,9 +136,17 @@ public static void afficheTab2D(int[][] tab)
     }
 }
 
-public static void rempliTabVoisins(int[][] tabadjacent)
+public static int getDegreMax(int[][] tab)
 {
-    
+    int tailletabdegre = getSommetMax(tab);
+    int degremax = 0;
+    for(int i =0;i<=tailletabdegre;i++)
+    {
+        if(degremax<tab[i][1])
+        {
+            degremax = tab[i][1];
+        }
+    }
+    return degremax;
 }
-
 }
