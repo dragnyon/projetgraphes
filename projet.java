@@ -11,25 +11,28 @@ public class projet
     {
         
         
-        String url = "D:/Informatique/projetgraphes/graphes.txt";
-        //String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/projet/testgraphe.txt";
+       // String url = "D:/Informatique/projetgraphes/graphes.txt";
+        String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/projet/testgraphe.txt";
 
         getdegre(url);
     }
 
-    static public void getdegre(String url)
+    static public void getdegre(String url) throws FileNotFoundException
         {
             File doc = new File(url); 
-            Scanner scan = new Scanner(doc);
-            int cptligneadj = 0;
+            Scanner scan;
+            
+                scan = new Scanner(doc);
+                int cptligneadj = 0;
 
-            //Premier scan pour compter le nombre de ligne
-            while(scan.hasNextLine())
-            {
-                cptligneadj++;
-                scan.nextLine();
-            }
-            scan.close();
+                  //Premier scan pour compter le nombre de ligne
+                 while(scan.hasNextLine())
+                 {
+                     cptligneadj++;
+                       scan.nextLine();
+                  }
+                
+                     scan.close();
 
             Scanner scan2 = new Scanner(doc);
             int cpt = 0;
@@ -58,7 +61,7 @@ public class projet
                 cpt++;
             }
             scan2.close();
-
+    
             //Tableau de la taille du sommet maximum
             int degre[][] = new int [sommetmax+1][2];
             System.out.println("Sommet max : " + sommetmax);
@@ -86,6 +89,7 @@ public class projet
             {
                 System.out.println("Sommet : "+degre[i][0]+" Degré : "+degre[i][1]);
             }
+       
         }
 
 
