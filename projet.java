@@ -173,7 +173,7 @@ static public int degen(int tabdeg [][],int tabvoisin[][])
     int k=0;
     while(getNbSommet(tabdeg)>0)
     {
-        for(int i=0; i<tabdeg.length;i++ )
+        for(int i=0; i<getDegreMax(tabdeg)+1;i++ )
         {
             if(tabdeg[i][1]<=k)
             {
