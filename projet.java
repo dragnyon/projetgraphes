@@ -9,12 +9,12 @@ public class projet
 public static void main (String [] args) throws Exception
 {
    // String url = "D:/Informatique/projetgraphes-main/graphes.txt";
-    String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/prj/projetgraphes/testgraphe.txt";
+    String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/prj/projetgraphes/graphes.txt";
     int tabadjacent[][] = rempliTabAdj(url);
     int tabdeg[][] = rempliTabDegre(tabadjacent);
     int tabvoisin[][] = rempliTabVoisins(tabadjacent,tabdeg);
     System.out.println("Degré maximum" + getDegreMax(tabdeg));
-    afficheTab2D(tabdeg);
+  //  afficheTab2D(tabdeg);
     System.out.println(degen(tabdeg, tabvoisin));
 }
 
@@ -105,7 +105,7 @@ public static int[][] rempliTabVoisins(int[][] tabadjacent,int[][] tabdegre)
     }
     
     //Affichage tableau voisins
-    for(int i =0 ;i<=sommetmax;i++)
+   /* for(int i =0 ;i<=sommetmax;i++)
     {
         System.out.print("\n");
         for(int j = 0; j<=degremax ; j++)
@@ -113,7 +113,7 @@ public static int[][] rempliTabVoisins(int[][] tabadjacent,int[][] tabdegre)
             System.out.print(voisin[i][j]+"|");
         }
         System.out.println();
-    }
+    }*/
     return voisin;
 }
 
@@ -172,7 +172,7 @@ static public int degen(int tabdeg [][],int tabvoisin[][])
 {
     int nb=getDegreMax(tabdeg)+1;
     int k=0;
-    while(nb>0)
+    while(nb>=0)
     {
         for(int i=0; i<getDegreMax(tabdeg)+1;i++ )
         {
