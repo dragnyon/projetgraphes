@@ -8,8 +8,8 @@ public class projet
 {
 public static void main (String [] args) throws Exception
 {
-    //String url = "D:/Informatique/projetgraphes/graphes.txt";
-    String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/prj/projetgraphes/testgraphe.txt";
+    String url = "D:/Informatique/projetgraphes-main/graphes.txt";
+    //String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/prj/projetgraphes/testgraphe.txt";
     int tabadjacent[][] = rempliTabAdj(url);
     int tabdeg[][] = rempliTabDegre(tabadjacent);
     int tabvoisin[][] = rempliTabVoisins(tabadjacent,tabdeg);
@@ -152,10 +152,23 @@ public static int getDegreMax(int[][] tab)
     return degremax;
 }
 
-    public int degen(int tab [][])
+public static int getNbSommet(int[][]tab)
+{
+    int nbsommet=0;
+    for(int i = 0; i<tab.length; i++)
     {
-
-        return 0;
+        if(tab[i][1]>0)
+        {
+            nbsommet++;
+        }
     }
+    return nbsommet;
+}
+
+
+public int degen(int tab [][])
+{
+    return 0;
+}
     
 }
