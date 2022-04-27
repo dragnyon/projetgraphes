@@ -8,13 +8,14 @@ public class projet
 {
 public static void main (String [] args) throws Exception
 {
-    String url = "D:/Informatique/projetgraphes-main/graphes.txt";
-    //String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/prj/projetgraphes/testgraphe.txt";
+   // String url = "D:/Informatique/projetgraphes-main/graphes.txt";
+    String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/prj/projetgraphes/testgraphe.txt";
     int tabadjacent[][] = rempliTabAdj(url);
     int tabdeg[][] = rempliTabDegre(tabadjacent);
     int tabvoisin[][] = rempliTabVoisins(tabadjacent,tabdeg);
     System.out.println("Degré maximum" + getDegreMax(tabdeg));
-  afficheTab2D(tabdeg);
+    afficheTab2D(tabdeg);
+    System.out.println(degen(tabdeg, tabvoisin));
 }
 
 public static int[][] rempliTabAdj(String url)throws FileNotFoundException
@@ -166,9 +167,33 @@ public static int getNbSommet(int[][]tab)
 }
 
 
-public int degen(int tab [][])
+
+static public int degen(int tabdeg [][],int tabvoisin[][])
 {
-    return 0;
+    int k=0;
+    while(getNbSommet(tabdeg)>0)
+    {
+        for(int i=0; i<tabdeg.length;i++ )
+        {
+            if(tabdeg[i][1]<=k)
+            {
+                tabdeg[i][1]=0;
+                for(int x=0;x<getDegreMax(tabdeg)+1;x++)
+                     for(int j=1;j<=tabdeg[x][1];j++)
+                     {
+                         //+baisser le degres edes sommet adj
+                         if(tabdeg[i][0]==tabvoisin[x][j])
+                          {
+                            tabdeg[i][1]=tabdeg[i][1]-1;
+                    
+                          }
+                     }
+            }
+        }
+        k++;
+    }
+    //k correspond a la degen
+    return k;
 }
     
 }
