@@ -8,13 +8,13 @@ public class projet
 {
 public static void main (String [] args) throws Exception
 {
-    String url = "D:/Informatique/projetgraphes/graphes.txt";
-    //String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/projet/testgraphe.txt";
+    //String url = "D:/Informatique/projetgraphes/graphes.txt";
+    String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/prj/projetgraphes/testgraphe.txt";
     int tabadjacent[][] = rempliTabAdj(url);
     int tabdeg[][] = rempliTabDegre(tabadjacent);
     int tabvoisin[][] = rempliTabVoisins(tabadjacent,tabdeg);
     System.out.println("Degré maximum" + getDegreMax(tabdeg));
-    afficheTab2D(tabdeg);
+  afficheTab2D(tabdeg);
 }
 
 public static int[][] rempliTabAdj(String url)throws FileNotFoundException
@@ -66,7 +66,7 @@ public static int[][] rempliTabDegre(int[][] tabadjacent)
     
     int tailleAdj = tabadjacent.length;
     //remplissage des degré de chaque sommet
-    int cpt=0;
+   
     for(int i = 0;i<tailleAdj-1;i++)
     {
         for(int j = 0 ; j<2 ; j++)
@@ -111,6 +111,7 @@ public static int[][] rempliTabVoisins(int[][] tabadjacent,int[][] tabdegre)
         {
             System.out.print(voisin[i][j]+"|");
         }
+        System.out.println();
     }
     return voisin;
 }
@@ -134,6 +135,7 @@ public static void afficheTab2D(int[][] tab)
     {
         System.out.println(tab[i][0]+"/"+tab[i][1]);
     }
+    System.out.println();
 }
 
 public static int getDegreMax(int[][] tab)
@@ -149,4 +151,11 @@ public static int getDegreMax(int[][] tab)
     }
     return degremax;
 }
+
+    public int degen(int tab [][])
+    {
+
+        return 0;
+    }
+    
 }
