@@ -170,8 +170,9 @@ public static int getNbSommet(int[][]tab)
 
 static public int degen(int tabdeg [][],int tabvoisin[][])
 {
+    int nb=getDegreMax(tabdeg)+1;
     int k=0;
-    while(getNbSommet(tabdeg)>0)
+    while(nb>0)
     {
         for(int i=0; i<getDegreMax(tabdeg)+1;i++ )
         {
@@ -188,7 +189,9 @@ static public int degen(int tabdeg [][],int tabvoisin[][])
                     
                           }
                      }
+                     
             }
+            nb--;
         }
         k++;
     }
