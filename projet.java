@@ -10,13 +10,34 @@ public static void main (String [] args) throws Exception
 {
    // String url = "D:/Informatique/projetgraphes-main/graphes.txt";
     String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/prj/projetgraphes/graphes.txt";
+    int nbadj=getNbAdj(url);
     int tabadjacent[][] = rempliTabAdj(url);
     int tabdeg[][] = rempliTabDegre(tabadjacent);
-    int tabvoisin[][] = rempliTabVoisins(tabadjacent,tabdeg);
+    int tabvoisin[][] = rempliTabVoisins(tabadjacent,tabdeg, nbadj);
     System.out.println("Degré maximum" + getDegreMax(tabdeg));
-  //  afficheTab2D(tabdeg);
+    afficheTab2D(tabadjacent);
     System.out.println(degen(tabdeg, tabvoisin));
 }
+
+
+public static int getNbAdj(String url) throws FileNotFoundException
+{
+    File doc = new File(url); 
+    Scanner scan;
+    scan = new Scanner(doc);
+    int cptligneadj = 0;
+    //Premier scan pour compter le nombre de ligne
+    while(scan.hasNextLine())
+    {
+        cptligneadj++;
+        scan.nextLine();
+    }      
+    scan.close();
+    return cptligneadj;
+
+}
+
+
 
 public static int[][] rempliTabAdj(String url)throws FileNotFoundException
 {
@@ -79,7 +100,7 @@ public static int[][] rempliTabDegre(int[][] tabadjacent)
     
 }
 
-public static int[][] rempliTabVoisins(int[][] tabadjacent,int[][] tabdegre)
+public static int[][] rempliTabVoisins(int[][] tabadjacent,int[][] tabdegre, int nbadj)
 {
     int sommetmax = getSommetMax(tabadjacent);
     int degremax = getDegreMax(tabdegre);
@@ -94,7 +115,7 @@ public static int[][] rempliTabVoisins(int[][] tabadjacent,int[][] tabdegre)
 
 
     //Remplissage des voisins
-    for(int i = 0 ; i<sommetmax ; i++)
+    for(int i = 0 ; i<=nbadj ; i++)
     {
         int cpt=1;
         while(voisin[tabadjacent[i][0]][cpt]!=0)
@@ -105,15 +126,15 @@ public static int[][] rempliTabVoisins(int[][] tabadjacent,int[][] tabdegre)
     }
     
     //Affichage tableau voisins
-   /* for(int i =0 ;i<=sommetmax;i++)
+    for(int i =0 ;i<=sommetmax;i++)
     {
-        System.out.print("\n");
+        System.out.println();
         for(int j = 0; j<=degremax ; j++)
         {
             System.out.print(voisin[i][j]+"|");
         }
         System.out.println();
-    }*/
+    }
     return voisin;
 }
 
@@ -151,19 +172,6 @@ public static int getDegreMax(int[][] tab)
         }
     }
     return degremax;
-}
-
-public static int getNbSommet(int[][]tab)
-{
-    int nbsommet=0;
-    for(int i = 0; i<tab.length; i++)
-    {
-        if(tab[i][1]>0)
-        {
-            nbsommet++;
-        }
-    }
-    return nbsommet;
 }
 
 
