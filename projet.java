@@ -8,22 +8,15 @@ public class projet
 {
 public static void main (String [] args) throws Exception
 {
-   // String url = "D:/Informatique/projetgraphes-main/graphes.txt";
-    String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/prj/projetgraphes/graphes.txt";
+    String url = "D:/Informatique/projetgraphes/testgraphe.txt";
+    //String url = "C:/Users/Dylan/Desktop/Semestre 6/Graphes/prj/projetgraphes/graphes.txt";
     int nbadj=getNbAdj(url);
     int tabadjacent[][] = rempliTabAdj(url);
     int tabdeg[][] = rempliTabDegre(tabadjacent);
     int tabvoisin[][] = rempliTabVoisins(tabadjacent,tabdeg, nbadj);
-  //  System.out.println("Tableau d'adj");
-   // afficheTab2D(tabadjacent);
-  //  System.out.println();
-  //  System.out.println("Tableau des degres de chaque sommet");
-  //  afficheTab2D(tabdeg);
-  //  System.out.println();
-   
-  //  System.out.println();
-    System.out.println("Degen : ");
+    System.out.print("Degen : ");
     System.out.println(degen(tabadjacent, tabdeg, tabvoisin));
+    //afficheVoisin(tabadjacent,tabdeg,tabvoisin);
 }
 
 
@@ -94,8 +87,8 @@ public static int[][] rempliTabDegre(int[][] tabadjacent)
         }
     
     int tailleAdj = tabadjacent.length;
+
     //remplissage des degré de chaque sommet
-   
     for(int i = 0;i<tailleAdj-1;i++)
     {
         for(int j = 0 ; j<2 ; j++)
@@ -129,20 +122,17 @@ public static int[][] rempliTabVoisins(int[][] tabadjacent,int[][] tabdegre, int
             cpt++;
         }        
         voisin[tabadjacent[i][0]][cpt]=tabadjacent[i][1];
-    }
-    
-    //Affichage tableau voisins
-  /*  System.out.println("Tableaux des voisin dans la fonction :");
-  for(int i =0 ;i<=sommetmax;i++)
-    {
-        System.out.println();
-        for(int j = 0; j<=degremax ; j++)
+        int cpt2=1;
+        while(voisin[tabadjacent[i][1]][cpt2]!=0)
         {
-            System.out.print(voisin[i][j]+"|");
-        }
-        System.out.println();
+            cpt2++;
+        }        
+        voisin[tabadjacent[i][1]][cpt]=tabadjacent[i][0];
     }
-    System.out.println();*/
+
+
+
+
     return voisin;
 }
 
@@ -161,7 +151,6 @@ public static void afficheVoisin(int[][] tabadjacent,int[][] tabdegre,int [][]vo
     }
     System.out.println();
 }
-
 
 public static int getSommetMax(int[][] tab)
 {
@@ -203,15 +192,14 @@ public static int getDegreMax(int[][] tab)
     return degremax;
 }
 
-
-
 static public int degen(int tabadj [][], int tabdeg [][],int tabvoisin[][])
 {
     int t=tabdeg.length;
     
-    int nb=getDegreMax(tabdeg)+1;
     int n= getDegreMax(tabdeg);
-  //  System.out.println(n);
+    int nb=n+1;
+    
+    //System.out.println(n);
     int k=1;
     
     while(nb>0)
