@@ -14,9 +14,17 @@ public static void main (String [] args) throws Exception
     int tabadjacent[][] = rempliTabAdj(url);
     int tabdeg[][] = rempliTabDegre(tabadjacent);
     int tabvoisin[][] = rempliTabVoisins(tabadjacent,tabdeg, nbadj);
-    System.out.println("Degré maximum" + getDegreMax(tabdeg));
+    System.out.println("Tableau d'adj");
     afficheTab2D(tabadjacent);
-    System.out.println(degen(tabdeg, tabvoisin));
+    System.out.println();
+    System.out.println("Tableau des degres de chaque sommet");
+    afficheTab2D(tabdeg);
+    System.out.println();
+    System.out.println("Tableau des voisins dans le main");
+    afficheTab2D(tabvoisin);
+    System.out.println();
+    System.out.println("Degen : ");
+  //  System.out.println(degen(tabdeg, tabvoisin));
 }
 
 
@@ -105,8 +113,7 @@ public static int[][] rempliTabVoisins(int[][] tabadjacent,int[][] tabdegre, int
     int sommetmax = getSommetMax(tabadjacent);
     int degremax = getDegreMax(tabdegre);
     int voisin[][] = new int [sommetmax+1][degremax+1];
-    
-
+  
     //Remplissage des noms
     for(int i = 0; i<=sommetmax;i++)
     {
@@ -115,7 +122,7 @@ public static int[][] rempliTabVoisins(int[][] tabadjacent,int[][] tabdegre, int
 
 
     //Remplissage des voisins
-    for(int i = 0 ; i<=nbadj ; i++)
+    for(int i = 0 ; i<nbadj ; i++)
     {
         int cpt=1;
         while(voisin[tabadjacent[i][0]][cpt]!=0)
@@ -126,7 +133,8 @@ public static int[][] rempliTabVoisins(int[][] tabadjacent,int[][] tabdegre, int
     }
     
     //Affichage tableau voisins
-    for(int i =0 ;i<=sommetmax;i++)
+    System.out.println("Tableaux des voisin dans la fonction :");
+  for(int i =0 ;i<=sommetmax;i++)
     {
         System.out.println();
         for(int j = 0; j<=degremax ; j++)
@@ -135,6 +143,7 @@ public static int[][] rempliTabVoisins(int[][] tabadjacent,int[][] tabdegre, int
         }
         System.out.println();
     }
+    System.out.println();
     return voisin;
 }
 
@@ -143,9 +152,12 @@ public static int getSommetMax(int[][] tab)
     int sommetmax=0;
     for(int i=0;i<tab.length;i++)
     {
-        if(tab[i][1]>sommetmax)
+        for(int j=0;j<2;j++)
         {
-            sommetmax=tab[i][1];
+         if(tab[i][j]>sommetmax)
+         {
+             sommetmax=tab[i][j];
+          }
         }
     }
     return sommetmax;
@@ -163,6 +175,7 @@ public static void afficheTab2D(int[][] tab)
 public static int getDegreMax(int[][] tab)
 {
     int tailletabdegre = getSommetMax(tab);
+   
     int degremax = 0;
     for(int i =0;i<=tailletabdegre;i++)
     {
@@ -178,33 +191,41 @@ public static int getDegreMax(int[][] tab)
 
 static public int degen(int tabdeg [][],int tabvoisin[][])
 {
+    int t=getDegreMax(tabdeg);
     int nb=getDegreMax(tabdeg)+1;
-    int k=0;
-    while(nb>=0)
+    
+    int k=1;
+    while(nb>0)
     {
-        for(int i=0; i<getDegreMax(tabdeg)+1;i++ )
+        for(int i=0; i<=t;i++ )
         {
             if(tabdeg[i][1]<=k)
             {
                 tabdeg[i][1]=0;
-                for(int x=0;x<getDegreMax(tabdeg)+1;x++)
-                     for(int j=1;j<=tabdeg[x][1];j++)
+                for(int x=0;x<=t;x++)
+                {
+                     for(int j=1;j<=t;j++)
                      {
                          //+baisser le degres edes sommet adj
                          if(tabdeg[i][0]==tabvoisin[x][j])
                           {
+                              tabvoisin[x][j]=-1;
                             tabdeg[i][1]=tabdeg[i][1]-1;
-                    
+                            System.out.println("pour k ="+k);
+                            afficheTab2D(tabdeg);
                           }
+
                      }
-                     
+                       
+                    }  
+                    nb--;    
             }
-            nb--;
+            
         }
         k++;
     }
     //k correspond a la degen
-    return k;
+    return k-1;
 }
     
 }
